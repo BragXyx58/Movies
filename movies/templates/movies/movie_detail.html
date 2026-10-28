@@ -1,0 +1,22 @@
+{% extends 'movies/base.html' %}
+
+{% block title %}{{ movie.title }}{% endblock %}
+
+{% block content %}
+<div class="box">
+    {% if movie.image_url %}
+    <img class="detail-image" src="{{ movie.image_url }}" alt="{{ movie.title }}">
+    {% endif %}
+    <div class="card-top">
+        <h1>{{ movie.title }}</h1>
+        <span class="rating big">★ {{ movie.rating }}</span>
+    </div>
+    <p class="meta">{{ movie.genre }} · {{ movie.release_year }}</p>
+    <p class="description">{{ movie.description|linebreaksbr }}</p>
+    <div class="actions">
+        <a class="btn" href="{% url 'movie_list' %}">Back</a>
+        <a class="btn" href="{% url 'movie_edit' movie.id %}">Edit</a>
+        <a class="btn btn-danger" href="{% url 'movie_delete' movie.id %}">Delete</a>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends 'movies/base.html' %}
+
+{% block title %}Movies{% endblock %}
+
+{% block content %}
+<div class="page-head">
+    <h1>Movies</h1>
+    <a class="btn btn-primary" href="{% url 'movie_add' %}">+ Add movie</a>
+</div>
+
+<div class="movies">
+    {% for movie in movies %}
+    <div class="card">
+        <a class="poster" href="{% url 'movie_detail' movie.id %}">
+            {% if movie.image_url %}
+            <img src="{{ movie.image_url }}" alt="{{ movie.title }}">
+            {% else %}
+            <span>{{ movie.title|first|upper }}</span>
+            {% endif %}
+        </a>
+        <div class="card-top">
+            <h2><a href="{% url 'movie_detail' movie.id %}">{{ movie.title }}</a></h2>
+            <span class="rating">★ {{ movie.rating }}</span>
+        </div>
+        <p class="meta">{{ movie.genre }} · {{ movie.release_year }}</p>
+        <div class="actions">
+            <a class="btn" href="{% url 'movie_detail' movie.id %}">View</a>
+            <a class="btn" href="{% url 'movie_edit' movie.id %}">Edit</a>
+            <a class="btn btn-danger" href="{% url 'movie_delete' movie.id %}">Delete</a>
+        </div>
+    </div>
+    {% empty %}
+    <p class="empty">No movies yet.</p>
+    {% endfor %}
+</div>
+{% endblock %}

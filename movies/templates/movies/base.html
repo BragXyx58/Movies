@@ -1,0 +1,25 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Movies{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'movies/css/style.css' %}">
+</head>
+<body>
+<nav>
+    <a class="logo" href="{% url 'movie_list' %}">MovieBase</a>
+    <div class="links">
+        <a href="{% url 'movie_list' %}">Movies</a>
+        <a href="{% url 'movie_add' %}">Add Movie</a>
+        <a href="/admin/">Admin</a>
+    </div>
+</nav>
+
+<main>
+    {% block content %}
+    {% endblock %}
+</main>
+</body>
+</html>
